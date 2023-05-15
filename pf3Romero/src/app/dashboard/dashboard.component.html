@@ -1,0 +1,68 @@
+<mat-drawer-container class="example-container" autosize>
+
+
+  <mat-drawer [opened]="true" #drawer class="example-sidenav" mode="side">
+
+    <p>{{ (authUser$ | async)?.nombre }}</p>
+    <p>{{ (authUser$ | async)?.email }}</p>
+
+
+    <mat-nav-list>
+      <a
+        [routerLink]="link.path"
+        mat-list-item
+        *ngFor="let link of links"
+      >
+        <mat-icon *ngIf="link.icon">{{ link.icon }}</mat-icon> {{ link.title }}
+      </a>
+      <a
+        (click)="logout()"
+        mat-list-item
+      >
+        Cerrar sesión
+      </a>
+    </mat-nav-list>
+
+
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+
+    <mat-toolbar color="primary">
+      <div class="flex justify-content-between">
+        <div>
+          <button
+            (click)="drawer.toggle()"
+            mat-icon-button
+            class="example-icon"
+            aria-label="Example icon-button with menu icon"
+          >
+            <mat-icon>menu</mat-icon>
+          </button>
+
+          <span class="example-spacer"></span>
+          <button
+            mat-icon-button
+            class="example-icon favorite-icon"
+            aria-label="Example icon-button with heart icon"
+          >
+
+          </button>
+          <button
+            mat-icon-button
+            class="example-icon"
+            aria-label="Example icon-button with share icon"
+          >
+
+          </button>
+        </div>
+        <p>{{ (authUser$ | async)?.nombre }}</p>
+      </div>
+    </mat-toolbar>
+
+
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</mat-drawer-container>
